@@ -24,3 +24,11 @@ yarn-error.log*
 
 backend/.env
 *.env
+
+# Python cache
+backend/__pycache__/
+*.pyc
+
+# Node modules
+frontend/node_modules
+frontend/.env
