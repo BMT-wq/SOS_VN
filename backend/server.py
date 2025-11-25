@@ -13,7 +13,21 @@ from datetime import datetime, timezone, timedelta
 from passlib.context import CryptContext
 import jwt
 import base64
-from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
+async def analyze_sos_with_ai(description: str, images_base64: List[str]) -> tuple:
+    """
+    Simple fallback analyzer because AI module is removed.
+    """
+    # RULE BASIC: nếu mô tả có từ nguy hiểm → red
+    danger_keywords = ["fire", "cháy", "burn", "accident", "blood", "injured", 
+                       "nguy hiểm", "kêu cứu", "khẩn cấp", "tai nạn", "kẹt"]
+
+    desc_lower = description.lower()
+
+    if any(word in desc_lower for word in danger_keywords):
+        return "red", "High danger based on keywords"
+
+    return "yellow", "Medium danger (AI disabled)"
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
